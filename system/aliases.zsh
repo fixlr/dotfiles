@@ -4,3 +4,5 @@ function cd() {
   pwd
   ls
 }
+
+alias t='todo.sh'
