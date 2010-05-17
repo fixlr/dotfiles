@@ -5,7 +5,7 @@ task :install do
   linkables = Dir.glob('*/**{.symlink}')
   
   linkables.each do |linkable|
-    file = linkable.split('/').last.split('.').first
+    file = linkable.split('/').last.chomp('.symlink')
     `ln -s "$PWD/#{linkable}" "$HOME/.#{file}"`
   end
 end
