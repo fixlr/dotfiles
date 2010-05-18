@@ -5,4 +5,8 @@ function cd() {
   ls
 }
 
+# todo.sh finger savers
 alias t='todo.sh'
+alias tp='todo.sh -+ ls'
+alias tpc='todo.sh -@ -+ ls'
+alias tc='todo.sh -@ ls'
