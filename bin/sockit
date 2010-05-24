@@ -1,0 +1,3 @@
+#!/bin/sh
+# Open up a SOCKS proxy for whatever
+ssh -CqDN 8080 $1
