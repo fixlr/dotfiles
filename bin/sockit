@@ -1,3 +1,11 @@
 #!/bin/sh
 # Open up a SOCKS proxy for whatever
-ssh -CqDN 8080 $1
+
+PID=`ps auxx | grep ssh | grep $1 | awk '{ print $2}'`
+echo $PID
+if [[ -n "$PID" ]]; then
+  echo "Old proxy is still running... close it first."
+  kill $PID
+fi
+
+ssh -D 8080 -fqCN $1
