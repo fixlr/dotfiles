@@ -7,8 +7,7 @@ function t() {
   fi
 }
 
-alias t='todo.sh'
 alias tp='todo.sh -+ ls'
 alias tpc='todo.sh -@ -+ ls'
 alias tc='todo.sh -@ ls'
-alias n='t ls +next'
+alias n='t lsp a'
