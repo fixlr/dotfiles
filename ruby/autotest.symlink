@@ -1,4 +1,4 @@
-require 'autotest/growl'
+#require 'autotest/growl'
 
-Autotest::Growl::clear_terminal = false
-Autotest::Growl::hide_label = true
+#Autotest::Growl::clear_terminal = false
+#Autotest::Growl::hide_label = true
