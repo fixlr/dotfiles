@@ -64,7 +64,6 @@ export PRI_B=$RED           # color for B priority
 #
 # export TODOTXT_FINAL_FILTER='cat'
 
-export TODOTXT_PRESERVE_LINE_NUMBERS=0
-# export TODOTXT_DATE_ON_ADD=1
+export TODOTXT_DATE_ON_ADD=0
 
 #TODOTXT_SORT_COMMAND="sort ..." customize list output
