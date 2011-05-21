@@ -1,0 +1,171 @@
+" My vim colors
+
+set bg=dark
+hi clear
+if exists("syntax_on")
+  syntax reset
+endif
+
+let colors_name = "mine"
+
+" GUI
+" hi Cursor
+hi Visual       gui=reverse
+hi CursorLine                                                             ctermbg=darkgray cterm=none
+hi LineNr       guifg=#888888 guibg=#E3E3E3 gui=none ctermfg=darkgray        ctermbg=black
+hi VertSplit    guifg=#444444 guibg=#444444          ctermfg=white       ctermbg=lightgray
+
+" StatusLine
+hi StatusLine   guifg=#f6f3e8 guibg=#444444 gui=italic
+hi StatusLineNC guifg=#857b6f guibg=#444444
+
+" Search
+
+" Syntax
+hi Normal       guifg=#f8f8f8 guibg=#0C1021 gui=none ctermfg=white        ctermbg=black
+hi Comment      guifg=#AEAEAE               gui=none ctermfg=DarkGray
+hi Constant     guifg=#D8FA3C               gui=none ctermfg=Yellow
+hi String       guifg=#61CE3C               gui=none ctermfg=DarkGreen
+hi Statement    guifg=#f8de33               gui=none ctermfg=DarkYellow
+hi Entity       guifg=#FF6400               gui=none ctermfg=Yellow
+hi Support      guifg=#8DA6CE               gui=none ctermfg=Brown
+hi Type         guifg=#D8FA3C               gui=none ctermfg=Yellow
+hi Title        guifg=#F6F3E8               gui=bold ctermfg=red
+hi link Define          Entity
+hi link Function        Support
+hi link Structure       Support
+hi link Special         Support
+hi link Test            Support
+hi link Character       Constant
+hi link Number          Constant
+hi link Boolean         Constant
+hi link Float           Number
+hi link Conditional     Constant
+hi link StorageClass    Statement
+hi link Operator        Constant
+hi link Type            Statement
+hi link Statement       Statement
+hi link Label           Normal
+
+" Invisible characters
+hi NonText      guifg=#808080 guibg=#0D1021 gui=none ctermfg=red
+hi SpecialKey   guifg=#808080 guibg=#343434 gui=none
+
+" Diff
+" hi diffAdded
+" hi diffRemoved
+" hi diffFile
+" hi diffNewFile
+" hi diffLine
+
+" Git
+" hi gitcommitFirstLine
+" hi gitcommitSelectedType
+" hi link gitcommitSelectedFile
+" hi gitcommitDiscardedType
+" hi link gitcommitDiscardedFile
+" hi gitcommitUntrackedFile
+
+" Ruby
+" hi rubyClass
+" hi rubyFunction
+" hi rubyInterpolationDelimiter
+" hi rubyInterpolation
+" hi rubySymbol
+" hi rubyConstant
+" hi rubyStringDelimiter
+" hi rubyInstanceVariable
+" hi rubyInclude
+" hi rubyGlobalVariable
+" hi rubyRegexp
+" hi rubyRegexpAnchor
+" hi rubyRegexpQuantifier
+" hi rubyRegexpParens
+" hi rubyRegexpEscape
+" hi rubyRegexpCharClass
+" hi rubyRegexpDelimiter
+" hi rubyEscape
+" hi rubyControl
+" hi rubyOperator
+" hi rubyException
+" hi rubyInstanceVariable
+" hi rubyInclude
+" hi rubyGlobalVariable
+" hi rubyRegexp
+" hi rubyRegexpAnchor
+" hi rubyRegexpQuantifier
+" hi rubyRegexpParens
+" hi rubyInclude
+
+" XML
+" hi link xmlEndTag xmlTag
+
+" HTML
+" hi htmlTag
+" hi link htmlEndTag htmlTag
+" hi link htmlTagName htmlTag
+" hi link htmlArg htmlTag
+" hi htmlSpecialChar
+" hi htmlH1
+" hi link htmlH2 htmlH1
+" hi link htmlH3 htmlH1
+" hi link htmlH4 htmlH1
+" hi link htmlH5 htmlH1
+" hi link htmlH6 htmlH1
+
+" JavaScript
+" hi javaScriptFunction
+" hi javaScriptFuncName
+" hi javaScriptLabel
+" hi javaScriptRailsFunction
+" hi javaScriptType
+" hi javaScriptArgument
+" hi javaScriptRegexpString
+" hi javaScriptSpecial
+" NOTE: Syntax Highlighting for javascript doesn't match the
+" TextMate version very accurately, because the javascript
+" syntax file does not create matches for some items. In
+" particular:
+" * javaScriptArgument - e.g. function(argument)
+" * javaScriptFuncName for object literal style functions - e.g.: 
+"   myFunction: function() { ... }
+
+" YAML
+" hi yamlAnchor
+" hi yamlAlias
+" hi yamlDocumentHeader
+
+" CSS
+" hi cssTagName
+" hi cssIdentifier
+" hi link cssClassName cssIdentifier
+" hi cssDefinition
+" hi link cssRenderProp cssDefinition
+" hi link cssTextProp cssDefinition
+" hi link cssFontProp cssDefinition
+" hi link cssColorProp cssDefinition
+" hi link cssBoxProp cssDefinition
+" hi link cssGeneratedContentProp cssDefinition
+" hi link cssUIProp cssDefinition
+" hi cssCommonAttr
+" hi link cssRenderAttr cssCommonAttr
+" hi link cssTextAttr cssCommonAttr
+" hi link cssFontAttr cssCommonAttr
+" hi link cssGeneratedContentAttr cssCommonAttr
+" hi cssURL
+" hi cssFunctionName
+" hi cssColor
+" hi cssValueLength
+" hi cssImportant
+
+" VimScript
+" hi vimGroup
+" hi link vimHiGroup vimGroup
+" hi vimCommentTitle
+" hi helpSpecial
+
+" Markdown
+" hi markdownBold
+" hi markdownItalic
+" hi markdownCode
+" hi link markdownCodeBlock markdownCode
