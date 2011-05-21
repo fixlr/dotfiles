@@ -33,4 +33,10 @@ task :install do
     `ln -s "$PWD/#{linkable}" "#{target}"`
   end
 end
+
+desc "Remove dotfile symlinks from the home directory"
+task :uninstall do
+  puts "Does not exist yet. How about you write one?"
+end
+
 task :default => 'install'
