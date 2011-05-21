@@ -1,5 +1,8 @@
-alias dotmate='mate $ZSH'
-alias dotcd='cd $ZSH'
+# Add an ls and pwd to the builtin cd
+function cd() {
+  builtin cd $*
+  pwd
+  ls
+}
 
 alias reload!='. ~/.zshrc'
-alias timer=$GEM_HOME'/bin/t'
