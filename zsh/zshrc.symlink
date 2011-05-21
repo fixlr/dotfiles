@@ -7,7 +7,7 @@ export PROJECTS=$HOME/Projects
 # source every .zsh file in this rep
 for config_file ($ZSH/**/*.zsh) source $config_file
 
-source $HOME/.localrc
+source $HOME/.zshrc.local
 
 # initialize autocomplete just in case
 compinit
