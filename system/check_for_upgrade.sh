@@ -11,11 +11,11 @@ function _update_dotfiles_update() {
 if [ -f ~/.dotfiles_update ]
 then
   . ~/.dotfiles_update
-  
+
   if [[ -z "$LAST_EPOCH" ]]; then
     _update_dotfiles_update && return 0;
   fi
-  
+
   epoch_diff=$((${_current_epoch} - $LAST_EPOCH))
   if [ $epoch_diff -gt 6 ]
   then
@@ -29,4 +29,4 @@ then
   fi
 fi
 
-_update_dotfiles_update    
+_update_dotfiles_update

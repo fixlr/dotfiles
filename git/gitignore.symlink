@@ -1,6 +1,9 @@
 .DS_Store
 .svn
 *~
-config/database.yml
-db/*.sqlite3*
-db/schema.rb
+database.yml
+schema.rb
+*.log
+*.sql
+*.sqlite*
+.bundle

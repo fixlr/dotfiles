@@ -1,0 +1,421 @@
+#!/usr/bin/env ruby
+
+unless File.exists? 'deploy.yml'
+  puts "File does not exist: deploy.yml"
+  exit
+end
+
+require 'rubygems'
+require 'timeout'
+require 'yaml'
+require 'uri'
+require 'net/ftp'
+require 'net/ssh'
+require 'net/sftp'
+require 'tempfile'
+
+# Store the current revision
+revision = `git rev-parse HEAD`.chomp.strip
+revision_file = Tempfile.new revision
+revision_file.write revision
+revision_file.close
+
+service_failures = {}
+
+services = YAML.load_file 'deploy.yml'
+settings = services.delete('settings') || {}
+
+# only deploy to ONE host if specified in ARGV[0]
+if services[ARGV[0]]
+  services = {ARGV[0] => services[ARGV[0]]}
+end
+
+trap 'INT' do
+  raise Interrupt, nil
+end
+
+module Git
+  class << self
+    def diff_uncommitted(local_path)
+      command = "git diff --name-status; git diff --cached --name-status"
+      changed_files(command)
+    end
+
+    # We figure out only which files need updating
+    # so don't upload duplicate files
+    def diff_committed(local_path, revision = nil)
+      remote_files = {}
+      if revision
+        command = "git diff --name-status #{revision} -- #{local_path}"
+      else
+        command = "git diff --name-status HEAD^ -- #{local_path}"
+      end
+
+      changed_files(command)
+    end
+
+    def changed_files(command)
+      files = `#{command}`
+      puts command
+
+      case $?.exitstatus
+      when 0, 141
+        # pass
+      else
+        return false
+      end
+
+      remote_files = {}
+
+      files.split("\n").reverse.each do |line|
+
+        c = line[0..0]
+        c = 'M' if c == 'A'
+        c = 'M' if c == 'C'
+
+        next unless c == 'M' || c == 'D'
+
+        file = line[2..-1]
+
+        if remote_files.key? file
+          if remote_files[file] == 'M' && c == 'D'
+              remote_files[file] = 'D'
+          elsif remote_files[file] == 'D' && c == 'M'
+            remote_files[file] = 'M'
+          end
+        else
+          remote_files[file] = c
+        end
+      end
+
+      remote_files
+    end
+  end
+
+  class Service
+    attr_reader :failures
+
+    def initialize(uri, options)
+      @uri = uri
+      @host = options['host']
+      @options = options
+      @scheme = options['scheme']
+      @failures = []
+      @max_retries = options['retries'] || 1
+      @max_retries = 1 if @max_retries <= 0
+    end
+
+    def automate
+      upload_maintenance_file = @options['maintenance_file'] && @options['maintenance_deploy_to']
+
+      tries = 1
+      until tries > @max_retries
+        self.connect
+        begin
+          if ! self.diff
+            return
+          end
+
+          if upload_maintenance_file
+            puts "Uploading Maintenance file"
+            @ftp.put(@options['maintenance_file'], @options['maintenance_deploy_to'])
+          end
+          self.upload
+          if upload_maintenance_file
+            puts "Removing Maintenance file"
+            @ftp.put(@options['maintenance_deploy_to'], @options['maintenance_deploy_to'])
+          end
+          self.disconnect
+          return true
+        rescue Interrupt, Errno::ETIMEDOUT, Errno::ECONNRESET, Timeout::Error => e
+          tries += 1
+          @failures << e
+
+          puts "Interrupting...going to retry"
+
+          if e.is_a? Interrupt
+            begin
+              Timeout::timeout(5) do
+                self.disconnect
+              end
+            rescue
+            end
+          end
+
+          if tries == @max_tries
+            puts "Not retrying (#{tries} out of #{@max_retries})"
+          else
+            puts "Retrying (#{tries} out of #{@max_retries})"
+          end
+        rescue Net::FTPTempError, Net::FTPPermError => e
+          @failures << e
+          return  false
+        end
+      end
+
+      tries != @max_retries
+    end
+
+    def diff
+      if @remote_files.is_a? Hash
+        return @remote_files
+      end
+
+      # Decide upload strategy
+      if ARGV[0] == 'diff' || ARGV[0] == 'd'
+        @remote_files = Git.diff_uncommitted(@options['local_path'])
+      else
+        @remote_files = self.diff_committed
+      end
+    end
+
+    def diff_committed
+      remote_revision = self.get_remote_revision
+
+      if @options['revision'] == remote_revision
+        if @options['ignore_if_same_revision']
+          puts "Same revision, ignoring"
+          next
+        end
+
+        puts "Same revision, overwriting"
+        remote_files = Git.diff_committed(@options['local_path'])
+      else
+        remote_files = Git.diff_committed(@options['local_path'], "#{remote_revision}...HEAD")
+      end
+    end
+
+    def upload
+      length = @options['length']
+      @remote_files.each do |local_file, modifier|
+        if !!@options['exclude_files'].find{|f| local_file =~ Regexp.new(f) }
+          puts "Skipping #{local_file} (exclude list)..."
+          next
+        end
+
+        if length != 0
+          if local_file[0...length] != @options['local_path']
+            next
+          else
+            remote_file = local_file[length..-1]
+          end
+        else
+          remote_file = local_file
+        end
+
+        case modifier
+        when 'A', 'M', 'C'
+          puts "Uploading #{local_file}"
+          self.put(local_file, remote_file)
+        when 'D'
+          puts "Deleting #{local_file}"
+          self.delete(remote_file)
+        end
+        @remote_files.delete(local_file)
+      end
+
+      puts 'Uploading revision'
+      self.put(@options['revision_file'].path, "revision")
+    end
+  end
+
+  class SFTP < Service
+    def initialize(uri, options)
+      super(uri, options)
+      @path = options['path'].empty? ? options['chdir'] : options['path']
+    end
+
+    def connect
+      puts "Connecting to #{@host}"
+      sftp_options = {}
+#      sftp_options[:verbose] = :debug
+      sftp_options[:port] = @uri.port if @uri.port
+      @sftp = Net::SFTP.start(@options['host'], @options['user'], sftp_options)
+    end
+
+    def disconnect
+#      @sftp.close!
+    end
+
+    def put(local_file, remote_file)
+      @sftp.upload!(local_file, "#{@path}/#{remote_file}")
+    end
+
+    def delete(remote_file)
+      @sftp.remove!("#{@remote_file}")
+    end
+
+    def get_remote_revision
+      begin
+        @sftp.file.open("#{@path}/revision", "r") do |f|
+          remote_revision = f.gets
+        end
+
+        puts "Remote Revision: #{remote_revision}"
+      rescue Net::SFTP::StatusException => e
+        raise e unless e.code == 2 && e.description == "no such file"
+        remote_revision = revision
+      end
+      remote_revision
+    end
+  end
+
+  class FTP < Service
+    def initialize(uri, options)
+      super(uri, options)
+      @remote_directories = {}
+      @port = options['port'] || uri.port || 21
+    end
+
+    def connect
+      puts "Connecting to #{@host}"
+
+      @ftp = Net::FTP.new
+
+      if @options['passive']
+        @ftp.passive = true
+      end
+
+      if @options['debug_mode']
+        @ftp.debug_mode = true
+      end
+
+      @ftp.binary = true
+      @ftp.connect(@options['host'], @options['port'])
+      @ftp.login(@options['user'], @options['password'])
+
+      @ftp.chdir(@options['path'].empty? ? @options['chdir'] : '/' + @options['path'])
+    end
+
+    def disconnect
+      @ftp.quit
+    end
+
+    def put(local_file, remote_file)
+      dir = File.dirname(remote_file)
+
+      unless @remote_directories[dir]
+        self.mkdir_p(dir)
+        @remote_directories[dir] = true
+      end
+
+      @ftp.put(local_file, remote_file)
+    end
+
+    def delete(remote_file)
+      begin
+        @ftp.delete(remote_file)
+      rescue Net::FTPPermError, Net::FTPReplyError => e
+        #
+      end
+    end
+
+    def get_remote_revision
+      remote_revision = false
+      begin
+        @ftp.get('revision', Tempfile.new(@host).path) do |line|
+          remote_revision = line.strip
+        end
+
+        puts "Remote Revision: #{remote_revision}"
+      rescue Net::FTPPermError => e
+        raise e unless e.message[0..2] == '550'
+        remote_revision = @options['revision']
+      end
+      remote_revision
+    end
+
+    def mkdir_p(directory)
+      begin
+        parent = File.dirname(directory)
+        files = @ftp.nlst(parent)
+
+        if directory == "." || files.any? { |a| a == directory }
+          return
+        else
+          puts "Creating Directory #{directory}"
+          @ftp.mkdir(directory)
+        end
+      rescue Net::FTPPermError
+        self.mkdir_p(File.dirname(directory))
+        begin
+          @ftp.mkdir(directory)
+        rescue Net::FTPPermError
+          # pass
+        end
+      rescue Net::FTPTempError
+        begin
+          puts "Creating Directory #{directory}"
+          @ftp.mkdir(directory)
+        rescue Net::FTPPermError => e
+          self.mkdir_p(File.dirname(directory))
+          @ftp.mkdir(directory)
+        end
+      end
+    end
+  end
+end
+
+services.each do |uri, options|
+  next if options['skip']
+
+  puts uri
+  uri = URI.parse(uri)
+
+  options['revision'] = revision
+  options['revision_file' ] = revision_file
+  options['exclude_files'] ||= []
+
+  # This should not override keys if they have already
+  # been set in settings.
+  # options['scheme']   = uri.scheme   if uri.scheme
+  # options['user']     = uri.user     if uri.user
+  # options['password'] = uri.password if uri.password
+  # options['host']     = uri.host     if uri.host
+  # options['port']     = uri.port     if uri.port
+  # options['path']     = uri.path     if uri.path
+  options.merge!(settings)
+
+  pwd = Dir.pwd
+
+  local_path = options['local_path']
+
+  if local_path
+    if local_path[0..0] == '/'
+      raise "Field `local_path` cannot be an absolute path"
+    end
+  else
+    local_path = ''
+  end
+
+  if local_path.length != 0
+    if local_path[-1..-1] != '/'
+      local_path += '/'
+    end
+
+    length = local_path.length
+  else
+    length = 0
+  end
+
+  options['length'] = length
+
+  service = case options['scheme']
+  when 'sftp' then Git::SFTP.new(uri, options)
+  when 'ftp'  then Git::FTP.new(uri, options)
+  end
+  unless service.automate
+    service_failures[uri] = service.failures
+  end
+end
+
+unless service_failures.empty?
+  puts "Failures"
+  service_failures.each do |uri, failures|
+    failures.each do |failure|
+      puts "#{uri}: #{failure.class} #{failure}"
+    end
+  end
+end
+
+revision_file.delete
