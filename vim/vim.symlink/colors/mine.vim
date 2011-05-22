@@ -22,9 +22,9 @@ hi StatusLineNC guifg=#857b6f ctermfg=243 guibg=#444444 ctermbg=7
 " Search
 
 " Syntax
-hi Normal       guifg=#f8f8f8 ctermfg=15  guibg=#0C1021 ctermbg=233 gui=none
+hi Normal       guifg=#ffffff ctermfg=255  guibg=#0C1021 ctermbg=233 gui=none
 hi link Label           Normal
-hi Comment      guifg=#AEAEAE ctermfg=145
+hi Comment      guifg=#AEAEAE ctermfg=235
 hi Constant     guifg=#D8FA3C ctermfg=191
 hi link Character       Constant
 hi link Number          Constant
@@ -32,7 +32,7 @@ hi link Float           Constant
 hi link Boolean         Constant
 hi link Conditional     Constant
 hi link Operator        Constant
-hi String       guifg=#61CE3C ctermfg=77
+hi String       guifg=#61CE3C ctermfg=76
 hi Statement    guifg=#f8de33 ctermfg=220
 hi link StorageClass    Statement
 hi link Type            Statement
@@ -105,22 +105,31 @@ hi link rubyRegexpEscape     rubyClass
 " hi link xmlEndTag xmlTag
 
 " HTML
-" hi htmlTag
+hi link htmlTag                 Support
+hi link htmlEndTag              Support
 " hi link htmlEndTag htmlTag
-" hi link htmlTagName htmlTag
-" hi link htmlArg htmlTag
+hi link htmlTagName             htmlTag
+hi link htmlArg                 htmlTag
+hi link htmlTitle               Normal
 " hi htmlSpecialChar
-" hi htmlH1
-" hi link htmlH2 htmlH1
-" hi link htmlH3 htmlH1
-" hi link htmlH4 htmlH1
-" hi link htmlH5 htmlH1
-" hi link htmlH6 htmlH1
+hi link htmlH1                  Normal
+hi link htmlH2 htmlH1
+hi link htmlH3 htmlH1
+hi link htmlH4 htmlH1
+hi link htmlH5 htmlH1
+hi link htmlH6 htmlH1
+hi link htmlLink               Normal
+
+" hi link htmlSpecialTagName     Entity
+" hi link htmlScriptTag          Entity
 
 " JavaScript
+hi link javaScript              Normal
 hi link javaScriptFunction      Statement
 hi link javaScriptOpAssign      Statement
 hi link javaScriptFuncName      Normal
+hi link javaScriptMember        Support
+hi link javaScriptNumber        Number
 " hi javaScriptLabel
 " hi javaScriptRailsFunction
 hi link javaScriptType          Statement
@@ -182,6 +191,26 @@ hi link vimGroup        Support
 " hi link vimHiGroup vimGroup
 " hi vimCommentTitle
 " hi helpSpecial
+
+" PHP
+hi link phpVarSelector     Normal
+hi link phpIdentifier      Normal
+hi link phpDoubleString    String
+hi link phpSingleString    String
+hi link phpInclude         Statement
+hi link phpConditional     Statement
+hi link phpOperator        Statement
+hi link phpStructure       Statement
+hi link phpSpecialChar     Constant
+hi link phpDefine          Support
+hi link phpSpecialFunction Support
+hi link phpComment         Comment
+
+" PHP - Stupid misc stuff
+" Why not phpDelimiter?
+hi link Delimiter          Normal
+" Seriously?  Single and double quotes are named "None"  Awesome, thanks.
+hi link None String
 
 " Markdown
 " hi markdownBold
