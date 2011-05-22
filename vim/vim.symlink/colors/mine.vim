@@ -16,39 +16,39 @@ hi LineNr       guifg=#888888 ctermfg=238 guibg=#E3E3E3 ctermbg=0         gui=no
 hi VertSplit    guifg=#444444 ctermfg=238 guibg=#444444 ctermbg=0
 
 " StatusLine
-hi StatusLine   guifg=#f6f3e8 ctermfg=238 guibg=#444444 ctermbg=7 gui=italic
+hi StatusLine   guifg=#f6f3e8 ctermfg=0 guibg=#444444 ctermbg=238 gui=none
 hi StatusLineNC guifg=#857b6f ctermfg=243 guibg=#444444 ctermbg=7
 
 " Search
 
 " Syntax
-hi Normal       guifg=#ffffff ctermfg=255  guibg=#0C1021 ctermbg=233 gui=none
-hi link Label           Normal
 hi Comment      guifg=#AEAEAE ctermfg=235
 hi Constant     guifg=#D8FA3C ctermfg=191
-hi link Character       Constant
-hi link Number          Constant
-hi link Float           Constant
-hi link Boolean         Constant
-hi link Conditional     Constant
-hi link Operator        Constant
+hi Entity       guifg=#FF6400 ctermfg=202
+hi Normal       guifg=#ffffff ctermfg=255  guibg=#0C1021 ctermbg=233 gui=none
 hi String       guifg=#61CE3C ctermfg=76
 hi Statement    guifg=#f8de33 ctermfg=220
-hi link StorageClass    Statement
-hi link Type            Statement
-hi Entity       guifg=#FF6400 ctermfg=202
-hi link Define          Entity
 hi Support      guifg=#8DA6CE ctermfg=110
-hi link Function        Support
-hi link Structure       Support
-hi link Special         Support
-hi link Test            Support
 hi Type         guifg=#D8FA3C ctermfg=191
 hi Title        guifg=#F6F3E8 ctermfg=7
+hi link Boolean         Constant
+hi link Character       Constant
+hi link Conditional     Constant
+hi link Define          Entity
+hi link Float           Constant
+hi link Function        Support
+hi link Label           Normal
+hi link Number          Constant
+hi link Operator        Constant
+hi link Special         Support
+hi link StorageClass    Statement
+hi link Structure       Support
+hi link Test            Support
+hi link Type            Statement
 
 " Invisible characters
-hi NonText      guifg=#808080 ctermfg=244 guibg=#0D1021 ctermbg=233 gui=none
-hi SpecialKey   guifg=#808080 ctermfg=244 guibg=#343434 ctermbg=236 gui=none
+hi NonText      guifg=#808080 ctermfg=235 gui=none
+hi SpecialKey   guifg=#808080 ctermfg=235 gui=none
 
 " Diff
 " hi diffAdded
@@ -66,32 +66,33 @@ hi SpecialKey   guifg=#808080 ctermfg=244 guibg=#343434 ctermbg=236 gui=none
 " hi gitcommitUntrackedFile
 
 " Ruby
-hi link rubyClass            Statement
-hi link rubyDefine           Statement
-hi link rubyBoolean          Statement
-hi link rubyConditional      Statement
 hi rubySymbol                guifg=#FBDE2D ctermfg=226
-hi link rubyPseudoVariable   rubySymbol
-hi link rubyFunction         Entity
-hi link rubyConstant         Support
+
+hi link rubyBlockParameter   Normal
+hi link rubyBoolean          Statement
+hi link rubyClass            Statement
 hi link rubyClassDeclaration Entity
-hi link rubyRailsUserClassDeclaration Entity
+hi link rubyConditional      Statement
+hi link rubyConstant         Support
+hi link rubyDefine           Statement
+hi link rubyFunction         Entity
+hi link rubyInstanceVariable Normal
 hi link rubyInterpolationDelimiter    String
 hi link rubyInterpolation    String
+hi link rubyPseudoVariable   rubySymbol
 hi link rubyRailsUserClass   Support
+hi link rubyRailsUserClassDeclaration Entity
+hi link rubyRegexpCharClass  Statement
+hi link rubyRegexpQuantifier String
+hi link rubyRegexpSpecial    String
+hi link rubyRegexpBrackets   String
+hi link rubyRegexpEscape     Statement
 hi link rubyStringDelimiter  String
-hi link rubyInstanceVariable Normal
-hi link rubyBlockParameter   Normal
 " hi rubyRegexp
 " hi rubyRegexpAnchor
 " hi rubyRegexpQuantifier
 " hi rubyRegexpParens
 " hi rubyRegexpEscape
-hi link rubyRegexpCharClass rubyClass
-hi link rubyRegexpQuantifier String
-hi link rubyRegexpSpecial    String
-hi link rubyRegexpBrackets   String
-hi link rubyRegexpEscape     rubyClass
 " hi rubyRegexpDelimiter
 " hi rubyEscape
 " hi rubyControl
@@ -105,40 +106,39 @@ hi link rubyRegexpEscape     rubyClass
 " hi link xmlEndTag xmlTag
 
 " HTML
-hi link htmlTag                 Support
-hi link htmlEndTag              Support
+hi link htmlArg     Support
+hi link htmlEndTag  Support
+hi link htmlH1      Normal
+hi link htmlH2      htmlH1
+hi link htmlH3      htmlH1
+hi link htmlH4      htmlH1
+hi link htmlH5      htmlH1
+hi link htmlH6      htmlH1
+hi link htmlLink    Normal
+hi link htmlTag     Support
+hi link htmlTagName Support
+hi link htmlTitle   Normal
 " hi link htmlEndTag htmlTag
-hi link htmlTagName             htmlTag
-hi link htmlArg                 htmlTag
-hi link htmlTitle               Normal
 " hi htmlSpecialChar
-hi link htmlH1                  Normal
-hi link htmlH2 htmlH1
-hi link htmlH3 htmlH1
-hi link htmlH4 htmlH1
-hi link htmlH5 htmlH1
-hi link htmlH6 htmlH1
-hi link htmlLink               Normal
-
 " hi link htmlSpecialTagName     Entity
 " hi link htmlScriptTag          Entity
 
 " JavaScript
 hi link javaScript              Normal
+hi link javaScriptBoolean      Statement
+hi link javaScriptBranch       Statement
 hi link javaScriptFunction      Statement
-hi link javaScriptOpAssign      Statement
 hi link javaScriptFuncName      Normal
 hi link javaScriptMember        Support
 hi link javaScriptNumber        Number
+hi link javaScriptOpAssign      Statement
+hi link javaScriptThis         Normal
+hi link javaScriptType          Statement
 " hi javaScriptLabel
 " hi javaScriptRailsFunction
-hi link javaScriptType          Statement
 " hi javaScriptArgument
 " hi javaScriptRegexpString
 " hi javaScriptSpecial
-hi link javaScriptBoolean      Statement
-hi link javaScriptBranch       Statement
-hi link javaScriptThis         Normal
 " NOTE: Syntax Highlighting for javascript doesn't match the
 " TextMate version very accurately, because the javascript
 " syntax file does not create matches for some items. In
@@ -153,58 +153,59 @@ hi link javaScriptThis         Normal
 " hi yamlDocumentHeader
 
 " CSS
-hi link cssTagName      Entity
-hi link cssIdentifier   Entity
-hi link cssClassName    Entity
-hi link cssPseudoClass  Entity
-hi link cssDefinition   Support
-hi link cssRenderProp   cssDefinition
-hi link cssTextProp     cssDefinition
-hi link cssFontProp     cssDefinition
-hi link cssColorProp    cssDefinition
-hi link cssBoxProp      cssDefinition
-hi link cssGeneratedContentProp cssDefinition
-hi link cssUIProp       cssDefinition
 hi cssCommonAttr        guifg=#FBDE2D ctermfg=226
-hi link cssRenderAttr   cssCommonAttr
-hi link cssTextAttr     cssCommonAttr
+
+hi link cssBoxProp      Support
+hi link cssClassName    Entity
+hi link cssColor        cssCommonAttr
+hi link cssColorAttr    Support
+hi link cssColorProp    Support
+hi link cssDefinition   Support
 hi link cssFontAttr     cssCommonAttr
+hi link cssFontProp     Support
+hi link cssGeneratedContentProp Support
+hi link cssIdentifier   Entity
+hi link cssPseudoClass  Entity
+hi link cssPseudoClassId Entity
+hi link cssRenderAttr   cssCommonAttr
+hi link cssRenderProp   Support
+hi link cssTagName      Entity
+hi link cssTextAttr     cssCommonAttr
+hi link cssTextProp     Support
+hi link cssUIProp       Support
+hi link cssURL          Normal
+hi link cssValueLength  cssCommonAttr
 " hi link cssGeneratedContentAttr cssCommonAttr
 " hi cssFunctionName
-hi link cssColor        cssCommonAttr
-hi link cssValueLength  cssCommonAttr
-hi link cssURL          Normal
-hi link cssColorAttr    Support
-hi link cssPseudoClassId Entity
 " hi cssImportant
 
 " VimScript
-hi link vimHiKeyList    String
+hi link vimGroup        Support
+hi link vimHiAttrib     String
+hi link vimHiCtermFgBg  String
+hi link vimHiCterm      String
+hi link vimHiGui        String
 hi link vimHiGuiFgBg    String
 hi link vimHiGuiRgb     String
-hi link vimHiGui        String
-hi link vimHiCtermFgBg  String
+hi link vimHiKeyList    String
 hi link vimNumber       String
-hi link vimHiCterm      String
-hi link vimHiAttrib     String
-hi link vimGroup        Support
 " hi link vimHiGroup vimGroup
 " hi vimCommentTitle
 " hi helpSpecial
 
 " PHP
-hi link phpVarSelector     Normal
-hi link phpIdentifier      Normal
-hi link phpDoubleString    String
-hi link phpSingleString    String
-hi link phpInclude         Statement
-hi link phpConditional     Statement
-hi link phpOperator        Statement
-hi link phpStructure       Statement
-hi link phpSpecialChar     Constant
-hi link phpDefine          Support
-hi link phpSpecialFunction Support
 hi link phpComment         Comment
+hi link phpConditional     Statement
+hi link phpDefine          Support
+hi link phpDoubleString    String
+hi link phpIdentifier      Normal
+hi link phpInclude         Statement
+hi link phpOperator        Statement
+hi link phpSingleString    String
+hi link phpSpecialChar     Constant
+hi link phpSpecialFunction Support
+hi link phpStructure       Statement
+hi link phpVarSelector     Normal
 
 " PHP - Stupid misc stuff
 " Why not phpDelimiter?
