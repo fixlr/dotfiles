@@ -11,13 +11,14 @@ let colors_name = "mine"
 " GUI
 " hi Cursor
 " hi Visual                                                               gui=reverse
+hi Visual                                               ctermbg=237
 hi CursorLine                                           ctermbg=7                     cterm=none
-hi LineNr       guifg=#888888 ctermfg=238 guibg=#E3E3E3 ctermbg=0         gui=none
-hi VertSplit    guifg=#444444 ctermfg=238 guibg=#444444 ctermbg=0
+hi LineNr       guifg=#888888 ctermfg=235 guibg=#E3E3E3 ctermbg=232         gui=none
+hi VertSplit    guifg=#444444 ctermfg=234 guibg=#444444 ctermbg=235
 
 " StatusLine
-hi StatusLine   guifg=#f6f3e8 ctermfg=0 guibg=#444444 ctermbg=238 gui=none
-hi StatusLineNC guifg=#857b6f ctermfg=243 guibg=#444444 ctermbg=7
+hi StatusLine   guifg=#f6f3e8 ctermfg=232 guibg=#444444 ctermbg=235 gui=none
+hi StatusLineNC guifg=#857b6f ctermfg=232 guibg=#444444 ctermbg=232
 
 " Search
 
@@ -189,6 +190,7 @@ hi link vimHiGuiFgBg    String
 hi link vimHiGuiRgb     String
 hi link vimHiKeyList    String
 hi link vimNumber       String
+hi link vimBracket      vimNotation
 " hi link vimHiGroup vimGroup
 " hi vimCommentTitle
 " hi helpSpecial
@@ -218,3 +220,8 @@ hi link None String
 " hi markdownItalic
 " hi markdownCode
 " hi link markdownCodeBlock markdownCode
+
+" NERDTree
+hi link treeDir            Support
+hi link treeDirSlash       Support
+hi link treeUp             Support
