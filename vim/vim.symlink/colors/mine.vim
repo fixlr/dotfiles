@@ -17,8 +17,8 @@ hi LineNr       guifg=#888888 ctermfg=235 guibg=#E3E3E3 ctermbg=232         gui=
 hi VertSplit    guifg=#444444 ctermfg=234 guibg=#444444 ctermbg=235
 
 " StatusLine
-hi StatusLine   guifg=#f6f3e8 ctermfg=232 guibg=#444444 ctermbg=235 gui=none
-hi StatusLineNC guifg=#857b6f ctermfg=232 guibg=#444444 ctermbg=232
+hi StatusLine   guifg=#f6f3e8 ctermfg=darkmagenta guibg=#444444 ctermbg=255 gui=none
+hi StatusLineNC guifg=#857b6f ctermfg=232 guibg=#444444 ctermbg=lightmagenta
 
 " Search
 
