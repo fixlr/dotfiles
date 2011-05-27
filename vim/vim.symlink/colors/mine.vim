@@ -77,10 +77,12 @@ hi link rubyConditional      Statement
 hi link rubyConstant         Support
 hi link rubyDefine           Statement
 hi link rubyFunction         Entity
+hi link rubyInclude          Statement
 hi link rubyInstanceVariable Normal
 hi link rubyInterpolationDelimiter    String
 hi link rubyInterpolation    String
 hi link rubyPseudoVariable   rubySymbol
+hi link rubyRailsTestMethod  Statement
 hi link rubyRailsUserClass   Support
 hi link rubyRailsUserClassDeclaration Entity
 hi link rubyRegexpCharClass  Statement
