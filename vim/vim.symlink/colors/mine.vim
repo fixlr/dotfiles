@@ -84,6 +84,7 @@ hi link rubyInterpolation    String
 hi link rubyPseudoVariable   rubySymbol
 hi link rubyRailsTestMethod  Statement
 hi link rubyRailsUserClass   Support
+hi link erubyRailsUserClass  Support
 hi link rubyRailsUserClassDeclaration Entity
 hi link rubyRegexpCharClass  Statement
 hi link rubyRegexpQuantifier String
@@ -127,16 +128,18 @@ hi link htmlTitle   Normal
 " hi link htmlScriptTag          Entity
 
 " JavaScript
-hi link javaScript              Normal
+hi link javaScript             Normal
 hi link javaScriptBoolean      Statement
 hi link javaScriptBranch       Statement
-hi link javaScriptFunction      Statement
-hi link javaScriptFuncName      Normal
-hi link javaScriptMember        Support
-hi link javaScriptNumber        Number
-hi link javaScriptOpAssign      Statement
+hi link javaScriptConditional  Statement
+hi link javaScriptFunction     Statement
+hi link javaScriptFuncName     Normal
+hi link javaScriptMember       Support
+hi link javaScriptNull         Statement
+hi link javaScriptNumber       Number
+hi link javaScriptOpAssign     Statement
 hi link javaScriptThis         Normal
-hi link javaScriptType          Statement
+hi link javaScriptType         Statement
 " hi javaScriptLabel
 " hi javaScriptRailsFunction
 " hi javaScriptArgument
