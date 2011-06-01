@@ -125,7 +125,7 @@ hi link htmlTitle   Normal
 " hi link htmlEndTag htmlTag
 " hi htmlSpecialChar
 " hi link htmlSpecialTagName     Entity
-" hi link htmlScriptTag          Entity
+hi link htmlScriptTag          Entity
 
 " JavaScript
 hi link javaScript             Normal
