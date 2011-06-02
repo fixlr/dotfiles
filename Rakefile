@@ -23,6 +23,7 @@ task :install do
         case STDIN.gets.chomp
         when 'o' then overwrite = true
         when 'b' then backup = true
+        when 's' then skip = true
         when 'O' then overwrite_all = true
         when 'B' then backup_all = true
         when 'S' then skip_all = true
