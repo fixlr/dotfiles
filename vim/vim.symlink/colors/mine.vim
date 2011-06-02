@@ -17,8 +17,8 @@ hi LineNr       guifg=#888888 ctermfg=235 guibg=#E3E3E3 ctermbg=232         gui=
 hi VertSplit    guifg=#444444 ctermfg=234 guibg=#444444 ctermbg=235
 
 " StatusLine
-hi StatusLine   guifg=#f6f3e8 ctermfg=232 guibg=#444444 ctermbg=235 gui=none
-hi StatusLineNC guifg=#857b6f ctermfg=232 guibg=#444444 ctermbg=232
+hi StatusLine   guifg=#f6f3e8 ctermfg=darkmagenta guibg=#444444 ctermbg=255 gui=none
+hi StatusLineNC guifg=#857b6f ctermfg=232 guibg=#444444 ctermbg=lightmagenta
 
 " Search
 
@@ -77,11 +77,14 @@ hi link rubyConditional      Statement
 hi link rubyConstant         Support
 hi link rubyDefine           Statement
 hi link rubyFunction         Entity
+hi link rubyInclude          Statement
 hi link rubyInstanceVariable Normal
 hi link rubyInterpolationDelimiter    String
 hi link rubyInterpolation    String
 hi link rubyPseudoVariable   rubySymbol
+hi link rubyRailsTestMethod  Statement
 hi link rubyRailsUserClass   Support
+hi link erubyRailsUserClass  Support
 hi link rubyRailsUserClassDeclaration Entity
 hi link rubyRegexpCharClass  Statement
 hi link rubyRegexpQuantifier String
@@ -122,19 +125,21 @@ hi link htmlTitle   Normal
 " hi link htmlEndTag htmlTag
 " hi htmlSpecialChar
 " hi link htmlSpecialTagName     Entity
-" hi link htmlScriptTag          Entity
+hi link htmlScriptTag          Entity
 
 " JavaScript
-hi link javaScript              Normal
+hi link javaScript             Normal
 hi link javaScriptBoolean      Statement
 hi link javaScriptBranch       Statement
-hi link javaScriptFunction      Statement
-hi link javaScriptFuncName      Normal
-hi link javaScriptMember        Support
-hi link javaScriptNumber        Number
-hi link javaScriptOpAssign      Statement
+hi link javaScriptConditional  Statement
+hi link javaScriptFunction     Statement
+hi link javaScriptFuncName     Normal
+hi link javaScriptMember       Support
+hi link javaScriptNull         Statement
+hi link javaScriptNumber       Number
+hi link javaScriptOpAssign     Statement
 hi link javaScriptThis         Normal
-hi link javaScriptType          Statement
+hi link javaScriptType         Statement
 " hi javaScriptLabel
 " hi javaScriptRailsFunction
 " hi javaScriptArgument

@@ -38,8 +38,8 @@ set laststatus=2
 " We have to set a winheight bigger than we want to set winminheight, but if
 " we set winheight to be huge before winminheight then the winminheight will
 " fail.
-set winheight=5
-set winminheight=5
+set winheight=10
+set winminheight=10
 set winheight=999
 
 " Without setting this, ZoomWin restores windows in a way that causes
