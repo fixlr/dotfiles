@@ -201,17 +201,22 @@ hi link vimBracket      vimNotation
 " hi helpSpecial
 
 " PHP
+hi link phpBoolean         Statement
 hi link phpComment         Comment
+hi link phpConstant        Statement
 hi link phpConditional     Statement
-hi link phpDefine          Support
+hi link phpDefine          Statement
 hi link phpDoubleString    String
 hi link phpIdentifier      Normal
 hi link phpInclude         Statement
 hi link phpOperator        Statement
+hi link phpMemberSelector  Statement
+hi link phpRegion          Normal
 hi link phpSingleString    String
 hi link phpSpecialChar     Constant
 hi link phpSpecialFunction Support
 hi link phpStructure       Statement
+hi link phpType            Support
 hi link phpVarSelector     Normal
 
 " PHP - Stupid misc stuff
