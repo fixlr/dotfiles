@@ -44,4 +44,8 @@ task :uninstall do
   puts "Does not exist yet. How about you write one?"
 end
 
+task :update_vim_bundles do
+  # ruby vim/update_bundles.rb
+end
+
 task :default => 'install'
