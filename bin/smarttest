@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+if [ -f "phpunit.xml" ]; then
+  command="phpunit"
+  filename="test"
+elif [ -d "spec" ]; then
+  command="rspec"
+  filename="spec"
+
+  if [ -f "Gemfile" ]; then
+    command="bundle exec $command"
+  fi
+
+  if [ -f "script/rails" ]; then
+    command="RAILS_ENV=test $command"
+  fi
+else
+  echo "Oops, I don't know how to test this project."
+  exit
+fi
+
+if [ $# -gt 0 ]; then
+  filename=$1
+fi
+
+echo "${command} ${filename}"
