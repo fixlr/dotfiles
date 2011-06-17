@@ -12,10 +12,6 @@ elif [ -d "spec" ]; then
   if [ -f "Gemfile" ]; then
     command="bundle exec $command"
   fi
-
-  if [ -f "script/rails" ]; then
-    command="RAILS_ENV=test $command"
-  fi
 else
   echo "Oops, I don't know how to test this project."
   exit
@@ -25,4 +21,8 @@ if [ $# -gt 0 ]; then
   filename=$1
 fi
 
-echo "${command} ${filename}"
+if [ -f "script/rails" ]; then
+  RAILS_ENV=test $command $filename
+else
+  $command $filename
+fi
