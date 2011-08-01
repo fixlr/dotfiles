@@ -107,7 +107,9 @@ hi link rubyStringDelimiter  String
 " hi rubyInclude
 
 " XML
-" hi link xmlEndTag xmlTag
+hi link xmlEndTag xmlTag
+hi link xmlAttrib xmlTag
+hi link xmlEqual  xmlTag
 
 " HTML
 hi link htmlArg     Support
