@@ -177,3 +177,10 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+
+function! RunTestFile()
+  :wa
+  exec ":!smarttest %"
+endfunction
+
+map <Leader>t :call RunTestFile()<CR>
