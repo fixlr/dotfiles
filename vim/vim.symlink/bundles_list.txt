@@ -25,3 +25,4 @@ git://github.com/tpope/vim-surround.git
 git://github.com/scrooloose/syntastic.git
 git://github.com/vim-scripts/taglist.vim.git
 git://github.com/tpope/vim-unimpaired.git
+git://github.com/tpope/vim-commentary.git
