@@ -7,3 +7,4 @@ schema.rb
 *.sql
 *.sqlite*
 .bundle
+doc/tags
