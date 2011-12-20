@@ -7,6 +7,7 @@ function t() {
   fi
 }
 
+alias ta="todo.sh add '(A)$*'"
 alias tp='todo.sh -+ ls'
 alias tpc='todo.sh -@ -+ ls'
 alias tc='todo.sh -@ ls'
