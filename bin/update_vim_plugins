@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+dotvim     = File.expand_path(ENV['HOME']+'/.vim')
+dotbundles = File.join(dotvim, 'bundle')
+bundles    = File.readlines(File.join(dotvim, 'bundle_list.txt'))
+                 .map(&:strip)
+                 .compact
+
+FileUtils.cd(dotbundles)
+
+if ARGV.include? '--trash'
+  puts 'TRASH ALL THE THINGS!!'
+  Dir["*"].each do |d|
+    puts "[DELETE] #{d}"
+    FileUtils.rm_rf(d)
+  end
+  exit
+end
+
+bundles.each do |url|
+  plugin_name = File.basename(url).sub('.git', '')
+
+  if File.exists? plugin_name
+    puts "\n[UPDATE] #{plugin_name}"
+
+    FileUtils.cd(plugin_name) do
+      system "git checkout master && git pull"
+    end
+  else
+    puts "\n[CREATE] #{plugin_name} from #{url}"
+    system "git clone #{url} #{plugin_name}"
+  end
+end
