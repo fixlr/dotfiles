@@ -6,7 +6,7 @@ fi
 
 export EDITOR='vim'
 export VISUAL='vim'
-export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
+export PATH="~/bin:$ZSH/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
