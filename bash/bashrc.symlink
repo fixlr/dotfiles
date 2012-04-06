@@ -1,2 +1,3 @@
 # Init rvm
 if [[ -s /Users/fixlerna/.rvm/scripts/rvm ]] ; then source /Users/fixlerna/.rvm/scripts/rvm ; fi
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
