@@ -171,4 +171,10 @@ function! RunTestFile()
   exec ":!smarttest %"
 endfunction
 
+function! RunFocusedFeatureFile()
+  :wa
+  exec ":!bundle exec cucumber % --tags @dev"
+endfunction
+
 map <Leader>t :call RunTestFile()<CR>
+map <Leader>f :call RunFocusedFeatureFile()<CR>
