@@ -12,7 +12,7 @@ let colors_name = "mine"
 " hi Cursor
 " hi Visual                                                               gui=reverse
 hi Visual                                               ctermbg=237
-hi CursorLine                                           ctermbg=7                     cterm=none
+hi CursorLine                                           ctermbg=235                     cterm=none
 hi LineNr       guifg=#888888 ctermfg=235 guibg=#E3E3E3 ctermbg=232         gui=none
 hi VertSplit    guifg=#444444 ctermfg=234 guibg=#444444 ctermbg=235
 
@@ -23,7 +23,7 @@ hi StatusLineNC guifg=#857b6f ctermfg=232 guibg=#444444 ctermbg=lightmagenta
 " Search
 
 " Syntax
-hi Comment      guifg=#AEAEAE ctermfg=235
+hi Comment      guifg=#AEAEAE ctermfg=236
 hi Constant     guifg=#D8FA3C ctermfg=191
 hi Entity       guifg=#FF6400 ctermfg=202
 hi Normal       guifg=#ffffff ctermfg=255  guibg=#0C1021 ctermbg=233 gui=none
@@ -232,8 +232,3 @@ hi link None String
 " hi markdownItalic
 " hi markdownCode
 " hi link markdownCodeBlock markdownCode
-
-" NERDTree
-hi link treeDir            Support
-hi link treeDirSlash       Support
-hi link treeUp             Support
