@@ -2,6 +2,7 @@ https://github.com/kchmck/vim-coffee-script
 https://github.com/pangloss/vim-javascript
 https://github.com/scrooloose/syntastic
 https://github.com/sickill/vim-pasta
+https://github.com/skalnik/vim-vroom
 https://github.com/tpope/vim-commentary
 https://github.com/tpope/vim-surround
 https://github.com/tpope/vim-rails
