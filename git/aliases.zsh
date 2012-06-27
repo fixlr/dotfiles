@@ -9,4 +9,5 @@ alias gca='git commit -a'
 alias gco='git checkout'
 alias gb='git branch'
 alias gs='git status'
+alias gss='git show --stat'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
