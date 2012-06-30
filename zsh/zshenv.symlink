@@ -1,4 +1,4 @@
-export ZSH=$HOME/.dotfiles
+export DOTSRC=$HOME/.dotfiles
 
 # Init rvm
-source $ZSH/ruby/rvm.zsh
+source $DOTSRC/ruby/rvm.zsh

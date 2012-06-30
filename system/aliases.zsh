@@ -1,3 +1,3 @@
-alias dotmate='mate $ZSH'
-alias dotvim='vim $ZSH'
-alias dotcd='cd $ZSH'
+alias dotmate='mate $DOTSRC'
+alias dotvim='vim $DOTSRC'
+alias dotcd='cd $DOTSRC'

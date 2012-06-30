@@ -24,7 +24,7 @@ then
     read line
     if [ "$line" = Y ] || [ "$line" = y ]
     then
-      /bin/sh $ZSH/system/upgrade.sh
+      /bin/sh $DOTSRC/system/upgrade.sh
     fi
   fi
 fi

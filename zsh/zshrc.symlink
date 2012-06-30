@@ -1,11 +1,11 @@
-# shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
+# shortcut to this dotfiles path is $DOTSRC
+export DOTSRC=$HOME/.dotfiles
 
 # Project folder that we can `c [tab]` to
 export PROJECTS=$HOME/Projects
 
 # source every .zsh file in this rep
-for config_file ($ZSH/**/*.zsh) source $config_file
+for config_file ($DOTSRC/**/*.zsh) source $config_file
 
 # Load local zsh customizations
 [[ -s $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
