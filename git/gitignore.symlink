@@ -8,3 +8,4 @@ schema.rb
 *.sqlite*
 .bundle
 doc/tags
+.tddium*
