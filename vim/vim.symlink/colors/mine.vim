@@ -47,6 +47,7 @@ hi link Structure       Support
 hi link Test            Support
 hi link Type            Statement
 
+hi rubyAccess   guifg=#FFFFFF ctermfg=255  guibg=#af0000 ctermbg=124
 " Invisible characters
 hi NonText      guifg=#808080 ctermfg=235 gui=none
 hi SpecialKey   guifg=#808080 ctermfg=235 gui=none
