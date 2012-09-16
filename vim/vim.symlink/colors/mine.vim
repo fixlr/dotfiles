@@ -153,7 +153,7 @@ hi link javaScriptType         Statement
 " syntax file does not create matches for some items. In
 " particular:
 " * javaScriptArgument - e.g. function(argument)
-" * javaScriptFuncName for object literal style functions - e.g.: 
+" * javaScriptFuncName for object literal style functions - e.g.:
 "   myFunction: function() { ... }
 
 " YAML
@@ -233,3 +233,6 @@ hi link None String
 " hi markdownItalic
 " hi markdownCode
 " hi link markdownCodeBlock markdownCode
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
