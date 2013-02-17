@@ -5,6 +5,7 @@ database.yml
 schema.rb
 *.log
 *.sql
+*.sql.gz
 *.sqlite*
 .bundle
 doc/tags
