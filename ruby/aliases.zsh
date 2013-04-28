@@ -1,5 +1,3 @@
-alias gems='cd `rvm gemdir`'
-
 alias sc='bundle exec rails console'
 alias ss='bundle exec rails server'
 alias sg='bundle exec rails generate'
