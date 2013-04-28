@@ -8,7 +8,7 @@ git_dirty() {
   then
     echo ""
   else
-    if [[ $st == "nothing to commit (working directory clean)" ]]
+    if [[ $st == "nothing to commit, working directory clean" ]]
     then
       echo "%{\033[1;38m%}$(git_prompt_info)%{\033[0m%}"
     else
