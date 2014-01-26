@@ -4,7 +4,7 @@ require 'fileutils'
 
 dotvim     = File.expand_path(ENV['HOME']+'/.vim')
 dotbundles = File.join(dotvim, 'bundle')
-bundles    = File.readlines(File.join(dotvim, 'bundle_list.txt'))
+bundles    = File.readlines(File.expand_path(ENV['HOME']+'/.vim_bundles'))
                  .map(&:strip)
                  .compact
 
