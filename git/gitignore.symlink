@@ -5,8 +5,10 @@ database.yml
 schema.rb
 *.log
 *.sql
-*.sql.gz
+*.sql.*
 *.sqlite*
 .bundle
 doc/tags
 .tddium*
+.powrc
+.test_queue_stats
