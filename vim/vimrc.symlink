@@ -132,6 +132,16 @@ function! RunFocusedFeatureFile()
   exec ":!bundle exec cucumber % --tags @dev"
 endfunction
 
+function! RunRubocopFile()
+  if &filetype == 'ruby'
+    :wa
+    exec ":!bundle exec rubocop %"
+  else
+    echoerr "Excuse me, I have to go. Somewhere there is a crime happening."
+  end
+endfunction
+
+map <Leader>c :call RunRubocopFile()<CR>
 map <Leader>t :call RunTestFile()<CR>
 map <Leader>f :call RunFocusedFeatureFile()<CR>
 
