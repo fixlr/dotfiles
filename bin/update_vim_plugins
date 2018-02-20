@@ -2,34 +2,28 @@
 
 require 'fileutils'
 
-dotvim     = File.expand_path(ENV['HOME']+'/.vim')
-dotbundles = File.join(dotvim, 'bundle')
-bundles    = File.readlines(File.expand_path(ENV['HOME']+'/.vim_bundles'))
-                 .map(&:strip)
-                 .compact
+dotbundles = File.join(ENV['HOME'], '.vim', 'bundle')
+bundles = File
+  .readlines(File.join(ENV['HOME'], '.vim_bundles'))
+  .map(&:strip)
+  .compact
+  .reject { |str| str.start_with?('#') }
+  .sort_by { |str| File.basename(str) }
 
 FileUtils.cd(dotbundles)
 
-if ARGV.include? '--trash'
-  puts 'TRASH ALL THE THINGS!!'
-  Dir["*"].each do |d|
-    puts "[DELETE] #{d}"
-    FileUtils.rm_rf(d)
-  end
-  exit
-end
-
+puts 'Updating bundles:'
 bundles.each do |url|
   plugin_name = File.basename(url).sub('.git', '')
+  print "  --> #{plugin_name}"
 
-  if File.exists? plugin_name
-    puts "\n[UPDATE] #{plugin_name}"
-
-    FileUtils.cd(plugin_name) do
-      system "git checkout master && git pull"
+  if File.exists?(File.join(dotbundles, plugin_name))
+    FileUtils.cd(File.join(dotbundles, plugin_name)) do
+      system "git checkout --quiet master && git pull --quiet &> /dev/null"
     end
   else
-    puts "\n[CREATE] #{plugin_name} from #{url}"
-    system "git clone #{url} #{plugin_name}"
+    system "git clone --quiet #{url} #{plugin_name}"
+    print ' *'
   end
+  puts
 end
