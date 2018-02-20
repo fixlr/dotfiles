@@ -135,7 +135,7 @@ endfunction
 function! RunRubocopFile()
   if &filetype == 'ruby'
     :wa
-    exec ":!bundle exec rubocop %"
+    exec ":!./bin/rubocop %"
   else
     echoerr "Excuse me, I have to go. Somewhere there is a crime happening."
   end
