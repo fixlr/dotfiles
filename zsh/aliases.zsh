@@ -6,3 +6,8 @@ function cd() {
 }
 
 alias reload!='. ~/.zshrc'
+
+alias man='tldr'
+alias mannn='/usr/bin/man'
+alias ft='open -a FoldingText.app'
+alias j='jobs'

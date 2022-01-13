@@ -6,7 +6,7 @@ fi
 
 export EDITOR='vim'
 export VISUAL='vim'
-export PATH="~/bin:$DOTSRC/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$DOTSRC/bin:.git/safe/../../bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
@@ -35,6 +35,8 @@ setopt APPEND_HISTORY                    # adds history
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
 setopt HIST_IGNORE_ALL_DUPS              # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
+
+unsetopt correct_all                     # disable autocorrect
 
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word

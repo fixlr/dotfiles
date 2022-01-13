@@ -1,4 +1,5 @@
 *.swp
-doc/tags
-vim/vim.symlink/bundle
 .netrwhist
+doc/tags
+vim/vim.symlink/backup
+vim/vim.symlink/bundle

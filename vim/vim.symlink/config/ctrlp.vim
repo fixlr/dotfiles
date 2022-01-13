@@ -7,3 +7,4 @@ let g:ctrlp_max_height=25
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']

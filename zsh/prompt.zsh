@@ -3,12 +3,12 @@ git_branch() {
 }
 
 git_dirty() {
-  st=$(git status 2>/dev/null | tail -n 1)
-  if [[ $st == "" ]]
+  if [ ! -d ".git" ]
   then
     echo ""
   else
-    if [[ $st == "nothing to commit, working directory clean" ]]
+    st=$(git status 2>/dev/null | tail -n 1)
+    if [[ $st == "nothing to commit, working tree clean" ]]
     then
       echo "%{\033[1;38m%}$(git_prompt_info)%{\033[0m%}"
     else
@@ -38,17 +38,25 @@ unpushed () {
 need_push () {
   if [[ $(unpushed) == "" ]]
   then
-    echo " "
+    echo ""
   else
     echo "%{\e[0;32m%}+%{\e[0m%}"
   fi
 }
 
-export PROMPT=$'=> %{\e[0;36m%}%1/%{\e[0m%} # '
 set_prompt () {
-  export RPROMPT="$(project_name_color)$(git_dirty)$(need_push)"
+  if [ -d "$PWD/.git" ]; then
+    export PROMPT=$'# %{\e[0;36m%}%1/%{\e[0m%} ($(project_name_color)$(git_dirty)$(need_push)) > '
+  else
+    export PROMPT=$'# %{\e[0;36m%}%1/%{\e[0m%} > '
+  fi
+}
+
+set_window_title () {
+  echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"
 }
 
 precmd() {
   set_prompt
+  set_window_title
 }

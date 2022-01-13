@@ -1,8 +1,6 @@
 .DS_Store
 .svn
 *~
-database.yml
-schema.rb
 *.log
 *.sql
 *.sql.*
@@ -12,3 +10,7 @@ doc/tags
 .tddium*
 .powrc
 .test_queue_stats
+.direnv
+.vagrant
+.byebug_history
+.ignore

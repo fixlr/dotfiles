@@ -1,5 +1,4 @@
+# shortcut to this dotfiles path is $DOTSRC
 export DOTSRC=$HOME/.dotfiles
 
-for config_file ($DOTSRC/**/*.zsh) source $config_file
-
-[[ -s $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
+[[ -s $HOME/.zshenv.local ]] && source $HOME/.zshenv.local

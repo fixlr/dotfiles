@@ -66,6 +66,15 @@ let mapleader=","
 :nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Delete empty lines at the end of file on save
+function! StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  :%s/\_s*\%$//e
+  call cursor(l, c)
+endfunction
+
 " CUSTOM AUTOCMDs
 augroup vimrcEx
   autocmd!
@@ -79,6 +88,7 @@ augroup vimrcEx
 
   " Delete trailing whitespace on save
   autocmd BufWritePre * :%s/\s\+$//e
+  autocmd BufWritePre <buffer> :call StripTrailingWhitespaces()
 
   " make uses real tabs
   autocmd FileType make set noexpandtab
