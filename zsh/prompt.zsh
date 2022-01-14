@@ -17,6 +17,14 @@ git_dirty() {
   fi
 }
 
+shell_arch() {
+  if [[ $(/usr/bin/arch) == "i386" ]]; then
+    echo "#"
+  else
+    echo ""
+  fi
+}
+
 git_prompt_info () {
  ref=$(git symbolic-ref HEAD 2>/dev/null) || return
  echo "${ref#refs/heads/}"
@@ -46,9 +54,9 @@ need_push () {
 
 set_prompt () {
   if [ -d "$PWD/.git" ]; then
-    export PROMPT=$'# %{\e[0;36m%}%1/%{\e[0m%} ($(project_name_color)$(git_dirty)$(need_push)) > '
+    export PROMPT=$'$(shell_arch) %{\e[0;36m%}%1/%{\e[0m%} ($(project_name_color)$(git_dirty)$(need_push)) > '
   else
-    export PROMPT=$'# %{\e[0;36m%}%1/%{\e[0m%} > '
+    export PROMPT=$'$(shell_arch) %{\e[0;36m%}%1/%{\e[0m%} > '
   fi
 }
 

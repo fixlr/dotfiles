@@ -11,3 +11,5 @@ alias man='tldr'
 alias mannn='/usr/bin/man'
 alias ft='open -a FoldingText.app'
 alias j='jobs'
+
+alias intel='arch -x86_64 /usr/local/bin/zsh'
