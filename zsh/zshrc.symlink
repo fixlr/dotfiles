@@ -1,3 +1,10 @@
+# Setup homebrew path for intel and apple silicon
+if [[ $(/usr/bin/arch) == "i386" ]]; then
+  export HOMEBREW_PREFIX="/usr/local"
+else
+  export HOMEBREW_PREFIX="/opt/homebrew"
+fi
+
 # source every .zsh file in this rep
 for config_file ($DOTSRC/**/*.zsh) source $config_file
 

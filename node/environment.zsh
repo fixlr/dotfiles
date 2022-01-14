@@ -1,1 +1,1 @@
-export NODENV_ROOT=/usr/local/var/nodenv
+export NODENV_ROOT="$HOMEBREW_PREFIX/var/nodenv"

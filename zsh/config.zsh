@@ -7,7 +7,7 @@ fi
 export EDITOR='vim'
 export VISUAL='vim'
 export PATH="$DOTSRC/bin:.git/safe/../../bin:$PATH"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+export MANPATH="$HOMEBREW_PREFIX/man:$HOMEBREW_PREFIX/mysql/man:$HOMEBREW_PREFIX/git/man:$MANPATH"
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 

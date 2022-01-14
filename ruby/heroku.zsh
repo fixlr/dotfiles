@@ -1,2 +1,2 @@
 # add heroku standalone
-PATH=$PATH:/usr/local/heroku/bin
+PATH=$PATH:$HOMEBREW_PREFIX/heroku/bin

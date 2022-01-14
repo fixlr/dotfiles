@@ -1,1 +1,1 @@
-eval "$(/usr/local/bin/nodenv init -)"
+eval "$($HOMEBREW_PREFIX/bin/nodenv init -)"
