@@ -38,6 +38,9 @@ setopt HIST_REDUCE_BLANKS
 
 unsetopt correct_all                     # disable autocorrect
 
+# Start with emacs defaults
+bindkey -e
+
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
