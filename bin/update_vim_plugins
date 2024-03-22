@@ -10,19 +10,26 @@ bundles = File
   .reject { |str| str.start_with?('#') }
   .sort_by { |str| File.basename(str) }
 
+dry_run = !!ARGV.delete('--dry-run')
+
+if ARGV.length == 1
+  bundles = bundles.grep(Regexp.new(ARGV[0]))
+end
+
 FileUtils.cd(dotbundles)
 
-puts 'Updating bundles:'
+puts "#{dry_run ? 'Skipping' : 'Updating' } bundles:"
+
 bundles.each do |url|
   plugin_name = File.basename(url).sub('.git', '')
   print "  --> #{plugin_name}"
 
-  if File.exists?(File.join(dotbundles, plugin_name))
+  if File.exist?(File.join(dotbundles, plugin_name))
     FileUtils.cd(File.join(dotbundles, plugin_name)) do
       system "git checkout --quiet master && git pull --quiet &> /dev/null"
-    end
+    end unless dry_run
   else
-    system "git clone --quiet #{url} #{plugin_name}"
+    system "git clone --quiet #{url} #{plugin_name}" unless dry_run
     print ' *'
   end
   puts
