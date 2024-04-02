@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Returns the name of the default branch for the origin remote.
+#
+
+if [ "$1" == "--remote" ]
+then
+  pos="3-4"
+else
+  pos="4"
+fi
+
+default_branch_name=$(git symbolic-ref --quiet refs/remotes/origin/HEAD | cut -d "/" -f "$pos")
+
+if [ -z "$default_branch_name" ]; then
+  >&2 echo "
+  Unable to identify the default branch because you do not have a HEAD set
+  for origin. You should set this by running:
+
+      git remote set-head origin --auto
+  "
+  exit 1
+else
+  echo "$default_branch_name"
+fi
