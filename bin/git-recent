@@ -1,0 +1,10 @@
+#!/bin/sh
+# git-recent
+#
+# Show branches, sorted by their last modified date.
+#
+# Usage:
+#   git recent [--remotes]
+
+git for-each-ref --sort=-committerdate refs/heads/ \
+                 --format='%(committerdate:short): %(refname:short) - %(committername)'
