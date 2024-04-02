@@ -23,7 +23,7 @@ hi StatusLineNC guifg=#857b6f ctermfg=232 guibg=#444444 ctermbg=lightmagenta
 " Search
 
 " Syntax
-hi Comment      guifg=#AEAEAE ctermfg=236
+hi Comment      guifg=#CECECE ctermfg=DarkGrey
 hi Constant     guifg=#D8FA3C ctermfg=191
 hi Entity       guifg=#FF6400 ctermfg=202
 hi Normal       guifg=#ffffff ctermfg=255  guibg=#0C1021 ctermbg=233 gui=none
