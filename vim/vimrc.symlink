@@ -8,6 +8,7 @@ set numberwidth=5
 set ruler
 set nocursorline
 set laststatus=2
+set autoread
 
 " We have to set a winheight bigger than we want to set winminheight, but if
 " we set winheight to be huge before winminheight then the winminheight will
@@ -95,6 +96,9 @@ augroup vimrcEx
 
   " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
   autocmd BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+
+  " Reload file when entering a buffer
+  au FocusGained,BufEnter * :silent! !
 augroup END
 
 " load the plugin and indent settings for the detected filetype
