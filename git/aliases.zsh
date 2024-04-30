@@ -11,5 +11,5 @@ alias gb='git branch'
 alias gs='git status'
 alias gss='git show --stat'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
-alias gri="git rebase -i origin/master"
+alias gri='git rebase -i origin/$(git default-branch)'
 alias qgit="git"
